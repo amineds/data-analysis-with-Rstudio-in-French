@@ -1,22 +1,101 @@
----
-title: "data-analysis-tutorial"
-author: "Amine BENHAMZA"
-date: "19 July 2015"
-output: html_document
----
+Ce tutoriel, dans la mesure du possible, présente les principales étapes d'une analyse de données en langage R à l'aide de RStudio.
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+Seront abordées :
+* Lecture de fichiers, cas particulier du format .csv
+* Nettoyage des données
+* Formattage de données
+* Exploration des données
+* Consolidation des données
+* Représentation graphique des données
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+### Lecture de fichiers, cas particulier du format `.csv`
+
+Première chose à faire, définir le répertoire de travail avec l'aide de la fonction `setwd`
 
 ```{r}
-summary(cars)
+#source : "https://d396qusza40orc.cloudfront.net/getdata%2Fdata%2FGDP.csv"
+gdp_data <- read.csv("gdp.csv",
+                     stringsAsFactors=TRUE,
+                     header = FALSE,
+                     skip=5,
+                     nrows=190,
+                     strip.white = TRUE,
+                     skipNul = TRUE
+                    )
+head(gdp_data,n=5) #les 5 premières lignes
+```
+Profilage de chaque colonne
+```{r}
+str(gdp_data)
 ```
 
-You can also embed plots, for example:
+### Nettoyage des données
+gdp_data$V5 <- as.numeric(gsub(',','',gdp_data$V5))
 
-```{r, echo=FALSE}
-plot(cars)
+Ne garder que les colonnes qui nous intéressent
+```{r}
+gdp_data <- gdp_data[,c(1,2,4,5)]
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+```{r}
+#source : "https://d396qusza40orc.cloudfront.net/getdata%2Fdata%2FEDSTATS_Country.csv"
+eds_data <- read.csv("edstats_country.csv",
+                     stringsAsFactors=TRUE,
+                     header = TRUE,
+                     skip=0,
+                     skipNul = TRUE,
+                     strip.white = TRUE
+                    )
+```
+
+
+
+### Formattage de données
+
+On commence par combiner les 2 dataframes avec la fonction merge.
+
+```{r}
+#Merging data
+merged_data = merge(gdp_data,
+                    eds_data,
+                    by.x="V1",
+                    by.y="CountryCode",
+                    all=FALSE                 
+                    )
+```
+On renomme certaines colonnes et on ordonne notre dataframe selon le `Rank`
+```{r}
+suppressWarnings(library(reshape))
+suppressWarnings(library(dplyr))
+merged_data <- reshape::rename(merged_data,c(V1="CountryCode",V2="Rank",V4="CountryName",V5="GDP"))
+
+merged_data <- arrange(merged_data,desc(Rank))
+```
+
+###  Exploration statistique des données
+
+Application de quelques fonctions statistiques sur les données
+
+```{r}
+#Moyenne du rang pour les pays membres de l'OCDE
+mean(merged_data$Rank[merged_data$Income.Group=="High income: OECD"])
+```
+
+```{r}
+#Moyenne du rang pour les pays hors OCDE
+mean(merged_data$Rank[merged_data$Income.Group=="High income: nonOECD"])
+```
+
+```{r}
+#Seuils du GDP
+range(merged_data$GDP)
+```
+
+###  Exploration graphique des données
+
+###  Consolidation des données
+
+### Représentation graphique des données
+
+
+

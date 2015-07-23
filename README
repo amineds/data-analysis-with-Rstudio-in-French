@@ -1,1 +1,22 @@
-This tutorial is an introduction to data analysis in R for french speackers
+Ce tutoriel est une initiation à l'analyse de données avec RStudio.
+
+Pré-requis : RStudio installée sur votre machine, de préférence version au dessus de 3.*.*
+
+Une connaissance basique du langage R, trouvez ici une bonne ressource pour débuter : http://moulon.inra.fr/~mag/modelstat/data/tutoriel_R.pdf
+
+Tappez version dans la console, vous aurez la version :
+platform       i386-w64-mingw32            
+arch           i386                        
+os             mingw32                     
+system         i386, mingw32               
+status                                     
+major          3                           
+minor          1.2                         
+year           2014                        
+month          10                          
+day            31                          
+svn rev        66913                       
+language       R                           
+version.string R version 3.1.2 (2014-10-31)
+nickname       Pumpkin Helmet 
+
