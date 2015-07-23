@@ -1,8 +1,8 @@
 Ce tutoriel est une initiation à l'analyse de données avec RStudio.
 
-Pré-requis : RStudio installée sur votre machine, de préférence version au dessus de 3.*.*
+Pré-requis : 
 
-Une connaissance basique du langage R, trouvez ici une bonne ressource pour débuter : http://moulon.inra.fr/~mag/modelstat/data/tutoriel_R.pdf
+1) RStudio installée sur votre machine, de préférence version au dessus de 3.*.*
 
 Tappez version dans la console, vous aurez la version :
 platform       i386-w64-mingw32            
@@ -20,3 +20,4 @@ language       R
 version.string R version 3.1.2 (2014-10-31)
 nickname       Pumpkin Helmet 
 
+2) Une connaissance basique du langage R, trouvez ici une bonne ressource pour débuter : http://moulon.inra.fr/~mag/modelstat/data/tutoriel_R.pdf
