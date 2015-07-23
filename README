@@ -21,3 +21,5 @@ version.string R version 3.1.2 (2014-10-31)
 nickname       Pumpkin Helmet 
 
 2) Une connaissance basique du langage R, trouvez ici une bonne ressource pour débuter : http://moulon.inra.fr/~mag/modelstat/data/tutoriel_R.pdf
+
+3) Placer tous les fichiers dans le même répertoire qui sera le répertoire de travail
